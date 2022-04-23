@@ -1,0 +1,14 @@
+{
+  "compilerOptions": {
+    "outDir": "main-dist",
+    "strict": true,
+    "noImplicitAny": true,
+    "strictNullChecks": true,
+    "baseUrl": ".",
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true
+  },
+  "include": ["./main/**/*"],
+  "exclude": ["dist", "node_modules"]
+}

@@ -1,0 +1,57 @@
+{
+  "name": "cloud-doc",
+  "version": "0.1.0",
+  "private": true,
+  "main": "./main-dist/index.js",
+  "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^6.1.1",
+    "@fortawesome/free-brands-svg-icons": "^6.1.1",
+    "@fortawesome/free-solid-svg-icons": "^6.1.1",
+    "@fortawesome/react-fontawesome": "^0.1.18",
+    "@types/electron": "^1.6.10",
+    "@types/react": "^18.0.6",
+    "bootstrap": "^5.1.3",
+    "cra-template-typescript": "1.2.0",
+    "electron": "^18.1.0",
+    "fortawesome": "^0.0.1-security",
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0",
+    "react-scripts": "5.0.1",
+    "sass": "^1.50.1",
+    "typescript": "^4.6.3"
+  },
+  "scripts": {
+    "ele": "electron . --no-sandbox",
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject",
+    "dev": "concurrently \"cross-env BROWSER=none npm run start\" \"tsc --project ./\" \"electron . --no-sandbox\"  "
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "devDependencies": {
+    "classnames": "^2.3.1",
+    "concurrently": "^7.1.0",
+    "cross-env": "^7.0.3",
+    "electron": "^18.1.0",
+    "electron-reloader": "^1.2.3",
+    "react-simplemde-editor": "^4.1.0"
+  }
+}
