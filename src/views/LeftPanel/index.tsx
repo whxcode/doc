@@ -1,4 +1,4 @@
-import React from "react";
+import * as React from "react";
 
 import FileSearch from "./FileSearch";
 import FileList from "./FileList";
@@ -11,13 +11,13 @@ import Button from "../Bottom";
 interface IProps {
   files: IFileItem[];
 
-  onAdd: () => void;
   onImport: () => void;
-  onSaveEdit: (id: string) => void;
+  onSaveEdit: (id: string, title: string, isNew: boolean) => void;
   onFileClick: (id: string) => void;
   handleUpdateFileName: (id: string, title: string) => void;
   onChange: (value: string) => void;
   onFileDelete: (id: string) => void;
+  createNewFile: () => void;
 }
 
 const LeftPanel = ({
@@ -26,7 +26,7 @@ const LeftPanel = ({
   onSaveEdit,
   onFileClick,
   onChange,
-  onAdd,
+  createNewFile,
   onImport,
 }: IProps) => {
   return (
@@ -45,7 +45,7 @@ const LeftPanel = ({
             text={"新建"}
             colorClass="btn-primary"
             icon={faPlus}
-            onBtnClick={onAdd}
+            onBtnClick={createNewFile}
           />
         </div>
 

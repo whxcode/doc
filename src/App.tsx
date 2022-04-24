@@ -1,9 +1,13 @@
 import React from "react";
 
+import { v4 as uuidv4 } from "uuid";
+
+import { flattenArr, objToArr } from "./utils/helper";
+
+import defaultFiles, { IFileItem } from "./utils/defaultFiles";
+
 import LeftPanel from "./views/LeftPanel";
 import RightPanel from "./views/RightPanel";
-
-import defaultFiles from "./utils/defaultFiles";
 
 import "bootstrap/dist/css/bootstrap.min.css";
 
@@ -11,13 +15,13 @@ import "./App.scss";
 
 export default function App() {
   const [keyword, setKeyword] = React.useState("");
-  const [files, setFiles] = React.useState(defaultFiles);
+  const [files, setFiles] = React.useState(flattenArr(defaultFiles));
   const [activeFileID, setActionFileID] = React.useState("");
   const [openedFileIDS, setOpenedFileIDS] = React.useState<string[]>([]);
   const [unsavedFileIDS, setUnsavedFileIDS] = React.useState<string[]>([]);
 
   const openedFiles = openedFileIDS.map((id) => {
-    return files.find((f) => f.id === id);
+    return files[id];
   });
 
   const handleSearchChange = (keyword: string) => {
@@ -25,17 +29,26 @@ export default function App() {
   };
 
   const handleFileDelete = (id: string) => {
-    setFiles(files.filter((f) => f.id !== id));
+    delete files[id];
+
+    setFiles({ ...files });
     handleCloseTab(id);
   };
 
-  const handleSaveEdit = (id: string) => {};
+  const handleSaveEdit = (id: string, title: string, isNew: boolean) => {
+    const file = files[id];
+
+    file.title = title;
+    file.isNew = false;
+
+    setFiles({ ...files });
+  };
+
   const handleFileClick = (id: string) => {
     setActionFileID(id);
     setOpenedFileIDS([...new Set([id, ...openedFileIDS])]);
   };
 
-  const handleAdd = () => {};
   const handleImport = () => {};
 
   const handleTabClick = (id: string) => {
@@ -67,45 +80,65 @@ export default function App() {
     value: string,
     key: "body" | "title"
   ) => {
-    setFiles(
-      files.map((file) => {
-        if (file.id === id) {
-          file[key] = value;
-        }
-        return file;
-      })
-    );
+    const newFile = {
+      ...files[id],
+      [key]: value,
+    };
+
+    setFiles({ ...files, [id]: newFile });
   };
 
   const handleUpdateFileName = (id: string, value: string) => {
     handleFileChange(id, value, "title");
   };
 
-  const fs = React.useMemo(() => {
+  const createNewFile = () => {
+    const id = uuidv4();
+
+    setFiles({
+      [id]: {
+        id,
+        title: "",
+        body: "",
+        isNew: true,
+        createdAt: Date.now(),
+      },
+      ...files,
+    });
+  };
+
+  const filesData = React.useMemo(() => {
     return keyword.length
-      ? files.filter((f) => f.title.includes(keyword))
-      : files;
-  }, [keyword]);
+      ? objToArr(files).filter((f) => f.title.includes(keyword))
+      : objToArr(files);
+  }, [keyword, files]);
+
+  const activeFile = files[activeFileID];
+
+  React.useEffect(() => {
+    window.electron.remote.ipcRenderer.send('www')
+
+  }, []);
 
   return (
     <div className="App container-fluid px-0">
       <div className="row no-gutters">
         <div className="col-3 px-0">
           <LeftPanel
-            files={fs}
-            onAdd={handleAdd}
+            files={filesData}
             onSaveEdit={handleSaveEdit}
             onFileDelete={handleFileDelete}
             onFileClick={handleFileClick}
             onChange={handleSearchChange}
             onImport={handleImport}
             handleUpdateFileName={handleUpdateFileName}
+            createNewFile={createNewFile}
           />
         </div>
 
         <div className="col-9 px-0">
           <RightPanel
-            files={files}
+            activeFile={activeFile}
             activeFileID={activeFileID}
             openedFiles={openedFiles}
             unsavedFileIDS={unsavedFileIDS}

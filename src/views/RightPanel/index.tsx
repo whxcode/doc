@@ -12,24 +12,26 @@ interface IProps {
 
   unsavedFileIDS: string[];
   openedFiles: IFileItem[];
-  files: IFileItem[];
 
   onCloseTab: (id: string) => void;
   onTabClick: (id: string) => void;
   onChange: (id: string, value: string) => void;
+
+  activeFile?:IFileItem;
 }
 
 const RightPanel = ({
   activeFileID,
-  files,
   unsavedFileIDS,
   openedFiles,
 
   onTabClick,
   onCloseTab,
   onChange,
+
+  activeFile
 }: IProps) => {
-  const activeFile = files.find((f) => f.id === activeFileID);
+
   return (
     <div>
       {!activeFileID ? (

@@ -7,8 +7,11 @@
     "baseUrl": ".",
     "esModuleInterop": true,
     "skipLibCheck": true,
-    "forceConsistentCasingInFileNames": true
+    "typeRoots": ["node_modules/@types", "./types"],
+    "forceConsistentCasingInFileNames": true,
+    "jsx": "react-jsx"
   },
-  "include": ["./main/**/*"],
-  "exclude": ["dist", "node_modules"]
+  "include": ["./main/**/*", "./src/**/*"],
+  "exclude": ["dist", "node_modules"],
+  "files": ["types/global.d.ts"]
 }

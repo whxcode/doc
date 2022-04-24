@@ -12,17 +12,17 @@ interface IProps {
   files: IFileItem[];
   onFileClick: (id: string) => void;
   onFileDelete: (id: string) => void;
-  onSaveEdit: (id: string) => void;
+  onSaveEdit: (id: string, title: string, isNew: boolean) => void;
 }
 
 const FileList = ({ files, onFileClick, onSaveEdit, onFileDelete }: IProps) => {
-  const [editStatus, setEditStatus] = useState(false);
+  const [editStatus, setEditStatus] = useState("");
   const [value, setValue] = useState("");
   let node = useRef(null);
   const enterPressed = useKeyPress(13);
   const escPressed = useKeyPress(27);
   const closeSearch = (editItem: IFileItem) => {
-    setEditStatus(false);
+    setEditStatus("");
     setValue("");
     // if we are editing a newly created file, we should delete this file when pressing esc
     if (editItem.isNew) {
@@ -68,15 +68,18 @@ const FileList = ({ files, onFileClick, onSaveEdit, onFileDelete }: IProps) => {
 
   useEffect(() => {
     const editItem = files.find((file) => file.id === editStatus);
+
     if (enterPressed && editStatus && value.trim() !== "") {
       onSaveEdit(editItem.id, value, editItem.isNew);
-      setEditStatus(false);
+      setEditStatus("");
       setValue("");
     }
+
     if (escPressed && editStatus) {
       closeSearch(editItem);
     }
   });
+
   useEffect(() => {
     const newFile = files.find((file) => file.isNew);
     if (newFile) {
@@ -84,6 +87,7 @@ const FileList = ({ files, onFileClick, onSaveEdit, onFileDelete }: IProps) => {
       setValue(newFile.title);
     }
   }, [files]);
+
   useEffect(() => {
     if (editStatus) {
       node.current.focus();
