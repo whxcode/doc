@@ -104,14 +104,15 @@ function App() {
     }, [keyword, files]);
     var activeFile = files[activeFileID];
     react_1["default"].useEffect(function () {
-        console.log("11");
-        window.setTimeout(function () {
-            window.electron.ipcRenderer.send("");
-            window.electron.ipcRenderer.invoke("test-1").then(function (data) {
-                console.log(data);
-            });
-        }, 2000);
+        console.log(window.electron);
+        window.electron.ipcRenderer.invoke('test-1').then(function (data) {
+            console.log('data', data);
+        });
+        // window.electron.remote.ipcRenderer.send('www')
     }, []);
-    return ((0, jsx_runtime_1.jsx)("div", __assign({ className: "App container-fluid px-0" }, { children: (0, jsx_runtime_1.jsxs)("div", __assign({ className: "row no-gutters" }, { children: [(0, jsx_runtime_1.jsx)("div", __assign({ className: "col-3 px-0" }, { children: (0, jsx_runtime_1.jsx)(LeftPanel_1["default"], { files: filesData, onSaveEdit: handleSaveEdit, onFileDelete: handleFileDelete, onFileClick: handleFileClick, onChange: handleSearchChange, onImport: handleImport, handleUpdateFileName: handleUpdateFileName, createNewFile: createNewFile }) })), (0, jsx_runtime_1.jsx)("div", __assign({ className: "col-9 px-0" }, { children: (0, jsx_runtime_1.jsx)(RightPanel_1["default"], { activeFile: activeFile, activeFileID: activeFileID, openedFiles: openedFiles, unsavedFileIDS: unsavedFileIDS, onCloseTab: handleCloseTab, onTabClick: handleTabClick, onChange: handleEditorChange }) }))] })) })));
+    return ((0, jsx_runtime_1.jsxs)("div", __assign({ className: "App container-fluid px-0" }, { children: [(0, jsx_runtime_1.jsx)("h1", __assign({ onClick: function () {
+                    console.log('11');
+                    window.electron.ipcRenderer.send("test-1");
+                } }, { children: "12312333333333 " }), void 0), (0, jsx_runtime_1.jsxs)("div", __assign({ className: "row no-gutters" }, { children: [(0, jsx_runtime_1.jsx)("div", __assign({ className: "col-3 px-0" }, { children: (0, jsx_runtime_1.jsx)(LeftPanel_1["default"], { files: filesData, onSaveEdit: handleSaveEdit, onFileDelete: handleFileDelete, onFileClick: handleFileClick, onChange: handleSearchChange, onImport: handleImport, handleUpdateFileName: handleUpdateFileName, createNewFile: createNewFile }, void 0) }), void 0), (0, jsx_runtime_1.jsx)("div", __assign({ className: "col-9 px-0" }, { children: (0, jsx_runtime_1.jsx)(RightPanel_1["default"], { activeFile: activeFile, activeFileID: activeFileID, openedFiles: openedFiles, unsavedFileIDS: unsavedFileIDS, onCloseTab: handleCloseTab, onTabClick: handleTabClick, onChange: handleEditorChange }, void 0) }), void 0)] }), void 0)] }), void 0));
 }
 exports["default"] = App;

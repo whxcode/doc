@@ -9,4 +9,4 @@ var client_1 = __importDefault(require("react-dom/client"));
 var App_tsx_1 = __importDefault(require("./App.tsx"));
 require("./index.css");
 var root = client_1["default"].createRoot(document.getElementById("root"));
-root.render((0, jsx_runtime_1.jsx)(react_1["default"].StrictMode, { children: (0, jsx_runtime_1.jsx)(App_tsx_1["default"], {}) }));
+root.render((0, jsx_runtime_1.jsx)(react_1["default"].StrictMode, { children: (0, jsx_runtime_1.jsx)(App_tsx_1["default"], {}, void 0) }, void 0));

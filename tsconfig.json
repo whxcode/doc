@@ -11,7 +11,7 @@
     "forceConsistentCasingInFileNames": true,
     "jsx": "react-jsx"
   },
-  "include": ["./main/**/*", "./src/**/*"],
+  "include": ["./main/**/*" ],
   "exclude": ["dist", "node_modules"],
   "files": ["types/global.d.ts"]
 }

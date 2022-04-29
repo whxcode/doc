@@ -116,12 +116,23 @@ export default function App() {
   const activeFile = files[activeFileID];
 
   React.useEffect(() => {
-    window.electron.remote.ipcRenderer.send('www')
+    console.log(window.electron);
 
+    window.electron.ipcRenderer.invoke('test-1').then(data => {
+      console.log('data',data)
+    })
+    // window.electron.remote.ipcRenderer.send('www')
   }, []);
 
   return (
     <div className="App container-fluid px-0">
+      <h1
+        onClick={() => {
+          console.log('11')
+          window.electron.ipcRenderer.send("test-1");
+        }}
+      >
+        12312333333333 </h1>
       <div className="row no-gutters">
         <div className="col-3 px-0">
           <LeftPanel

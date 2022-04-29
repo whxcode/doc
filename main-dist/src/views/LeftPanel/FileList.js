@@ -91,12 +91,12 @@ var FileList = function (_a) {
             node.current.focus();
         }
     }, [editStatus]);
-    return ((0, jsx_runtime_1.jsx)("ul", __assign({ className: "list-group list-group-flush file-list" }, { children: files.map(function (file) { return ((0, jsx_runtime_1.jsxs)("li", __assign({ className: "list-group-item bg-light row d-flex align-items-center file-item mx-0", "data-id": file.id, "data-title": file.title }, { children: [file.id !== editStatus && !file.isNew && ((0, jsx_runtime_1.jsxs)(jsx_runtime_1.Fragment, { children: [(0, jsx_runtime_1.jsx)("span", __assign({ className: "col-2" }, { children: (0, jsx_runtime_1.jsx)(react_fontawesome_1.FontAwesomeIcon, { size: "lg", icon: free_brands_svg_icons_1.faMarkdown }) })), (0, jsx_runtime_1.jsx)("span", __assign({ className: "col-10 c-link", onClick: function () {
+    return ((0, jsx_runtime_1.jsx)("ul", __assign({ className: "list-group list-group-flush file-list" }, { children: files.map(function (file) { return ((0, jsx_runtime_1.jsxs)("li", __assign({ className: "list-group-item bg-light row d-flex align-items-center file-item mx-0", "data-id": file.id, "data-title": file.title }, { children: [file.id !== editStatus && !file.isNew && ((0, jsx_runtime_1.jsxs)(jsx_runtime_1.Fragment, { children: [(0, jsx_runtime_1.jsx)("span", __assign({ className: "col-2" }, { children: (0, jsx_runtime_1.jsx)(react_fontawesome_1.FontAwesomeIcon, { size: "lg", icon: free_brands_svg_icons_1.faMarkdown }, void 0) }), void 0), (0, jsx_runtime_1.jsx)("span", __assign({ className: "col-10 c-link", onClick: function () {
                                 onFileClick(file.id);
-                            } }, { children: file.title }))] })), (file.id === editStatus || file.isNew) && ((0, jsx_runtime_1.jsxs)(jsx_runtime_1.Fragment, { children: [(0, jsx_runtime_1.jsx)("input", { className: "form-control col-10", ref: node, value: value, placeholder: "\u8BF7\u8F93\u5165\u6587\u4EF6\u540D\u79F0", onChange: function (e) {
+                            } }, { children: file.title }), void 0)] }, void 0)), (file.id === editStatus || file.isNew) && ((0, jsx_runtime_1.jsxs)(jsx_runtime_1.Fragment, { children: [(0, jsx_runtime_1.jsx)("input", { className: "form-control col-10", ref: node, value: value, placeholder: "\u8BF7\u8F93\u5165\u6587\u4EF6\u540D\u79F0", onChange: function (e) {
                                 setValue(e.target.value);
-                            } }), (0, jsx_runtime_1.jsx)("button", __assign({ type: "button", className: "icon-button col-2", onClick: function () {
+                            } }, void 0), (0, jsx_runtime_1.jsx)("button", __assign({ type: "button", className: "icon-button col-2", onClick: function () {
                                 closeSearch(file);
-                            } }, { children: (0, jsx_runtime_1.jsx)(react_fontawesome_1.FontAwesomeIcon, { title: "\u5173\u95ED", size: "lg", icon: free_solid_svg_icons_1.faTimes }) }))] }))] }), file.id)); }) })));
+                            } }, { children: (0, jsx_runtime_1.jsx)(react_fontawesome_1.FontAwesomeIcon, { title: "\u5173\u95ED", size: "lg", icon: free_solid_svg_icons_1.faTimes }, void 0) }), void 0)] }, void 0))] }), file.id)); }) }), void 0));
 };
 exports["default"] = FileList;

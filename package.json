@@ -15,6 +15,7 @@
     "cra-template-typescript": "1.2.0",
     "electron": "^18.1.0",
     "fortawesome": "^0.0.1-security",
+    "lowdb": "^3.0.0",
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
     "react-scripts": "5.0.1",
@@ -23,7 +24,7 @@
     "uuid": "^8.3.2"
   },
   "scripts": {
-    "ele": "electron . --no-sandbox",
+    "ele": " electron . --no-sandbox",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",

@@ -1,6 +1,5 @@
-import { BrowserWindow, app, ipcMain } from "electron";
+import { BrowserWindow, app, ipcMain ,shell} from "electron";
 import { join } from "path";
-
 
 function createWindow(url: string) {
   const window: BrowserWindow = new BrowserWindow({
@@ -8,36 +7,36 @@ function createWindow(url: string) {
     width: 1000,
     webPreferences: {
       nodeIntegration: true,
-      contextIsolation: false,
+      contextIsolation: true,
       preload: join(__dirname, "../preload.js"),
     },
   });
 
-  ipcMain.handle("test-1", async (event, ...args) => {
-    const result = await Promise.resolve({ code: 0 });
-    return "0000";
-  });
-
-  window.loadURL(url);
-
-  if (!app.isPackaged) {
-    try {
-      require("electron-reloader")(module, {});
-    } catch (_) {}
-    window.webContents.openDevTools();
-    window.loadURL(url);
-  }
 
   return window;
 }
 
 app.on("ready", () => {
-  process.env["ELECTRON_DISABLE_SECURITY_WARNINGS"] = "true"; //关闭web安全警告
 
+ return;
   const window = createWindow("http://localhost:3000");
 
+  ipcMain.on("test-1", async (event, ...args) => {
+    shell.openExternal('http://www.google.com')
+    console.log("111");
+    return "0000";
+  });
 
   window.webContents.on("ipc-message", () => {
     console.log("ipc-message");
+    shell.openExternal('http://www.google.com')
   });
+
+  console.log(
+    'end  '
+  )
+
+  // window.loadURL('http://localhost:3000');
+  window.loadFile('index.html')
+ 
 });
