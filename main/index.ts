@@ -1,4 +1,4 @@
-import { BrowserWindow, app, ipcMain ,shell} from "electron";
+import { BrowserWindow, app, ipcMain, shell } from "electron";
 import { join } from "path";
 
 function createWindow(url: string) {
@@ -12,31 +12,32 @@ function createWindow(url: string) {
     },
   });
 
+  if (true) {
+    try {
+      require("electron-reloader")(module, {});
+    } catch (_) {}
+    window.webContents.openDevTools();
+    window.loadURL(url);
+  }
 
   return window;
 }
 
 app.on("ready", () => {
-
- return;
   const window = createWindow("http://localhost:3000");
 
-  ipcMain.on("test-1", async (event, ...args) => {
-    shell.openExternal('http://www.google.com')
-    console.log("111");
-    return "0000";
-  });
+  ipcMain.handle('get',async () => {
+    return {code:1}
+  })
+
+  ipcMain.handle('st',async () => {
+    return {code:2}
+  })
 
   window.webContents.on("ipc-message", () => {
     console.log("ipc-message");
-    shell.openExternal('http://www.google.com')
+    shell.openExternal("http://www.google.com");
   });
 
-  console.log(
-    'end  '
-  )
-
-  // window.loadURL('http://localhost:3000');
-  window.loadFile('index.html')
- 
+  window.loadURL("http://localhost:3000");
 });

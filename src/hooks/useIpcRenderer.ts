@@ -1,7 +1,4 @@
-import { useEffect } from 'react'
-
-
-const useIpcRenderer = (keyCallbackMap) => {
+const useIpcRenderer = (keyCallbackMap: any) => {
 }
 
 export default useIpcRenderer

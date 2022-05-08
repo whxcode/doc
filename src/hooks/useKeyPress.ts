@@ -3,12 +3,12 @@ import { useState, useEffect } from "react";
 const useKeyPress = (targetKeyCode: number) => {
   const [keyPressed, setKeyPressed] = useState(false);
 
-  const keyDownHandler = ({ keyCode }) => {
+  const keyDownHandler = ({ keyCode }: KeyboardEvent) => {
     if (keyCode === targetKeyCode) {
       setKeyPressed(true);
     }
   };
-  const keyUpHandler = ({ keyCode }) => {
+  const keyUpHandler = ({ keyCode }: KeyboardEvent) => {
     if (keyCode === targetKeyCode) {
       setKeyPressed(false);
     }

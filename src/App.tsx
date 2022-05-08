@@ -46,7 +46,7 @@ export default function App() {
 
   const handleFileClick = (id: string) => {
     setActionFileID(id);
-    setOpenedFileIDS([...new Set([id, ...openedFileIDS])]);
+    setOpenedFileIDS([...new Set([id, ...openedFileIDS])] as string[]);
   };
 
   const handleImport = () => {};
@@ -116,12 +116,14 @@ export default function App() {
   const activeFile = files[activeFileID];
 
   React.useEffect(() => {
-    console.log(window.electron);
-
-    window.electron.ipcRenderer.invoke('test-1').then(data => {
-      console.log('data',data)
+    window.electron.ipcRenderer.invoke('get').then(data => {
+      console.log(data)
     })
-    // window.electron.remote.ipcRenderer.send('www')
+
+    window.electron.ipcRenderer.invoke('st').then(data => {
+      console.log(data)
+    })
+
   }, []);
 
   return (

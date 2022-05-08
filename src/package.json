@@ -1,0 +1,9 @@
+{
+  "devDependencies": {
+    "@types/uuid": "^8.3.4"
+  },
+  "dependencies": {
+    "@types/react-dom": "^18.0.3",
+    "web-vitals": "^2.1.4"
+  }
+}

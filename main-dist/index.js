@@ -48,29 +48,31 @@ function createWindow(url) {
             preload: (0, path_1.join)(__dirname, "../preload.js")
         }
     });
+    if (true) {
+        try {
+            require("electron-reloader")(module, {});
+        }
+        catch (_) { }
+        window.webContents.openDevTools();
+        window.loadURL(url);
+    }
     return window;
 }
 electron_1.app.on("ready", function () {
-    return;
     var window = createWindow("http://localhost:3000");
-    electron_1.ipcMain.on("test-1", function (event) {
-        var args = [];
-        for (var _i = 1; _i < arguments.length; _i++) {
-            args[_i - 1] = arguments[_i];
-        }
-        return __awaiter(void 0, void 0, void 0, function () {
-            return __generator(this, function (_a) {
-                electron_1.shell.openExternal('http://www.google.com');
-                console.log("111");
-                return [2 /*return*/, "0000"];
-            });
+    electron_1.ipcMain.handle('get', function () { return __awaiter(void 0, void 0, void 0, function () {
+        return __generator(this, function (_a) {
+            return [2 /*return*/, { code: 1 }];
         });
-    });
+    }); });
+    electron_1.ipcMain.handle('set', function () { return __awaiter(void 0, void 0, void 0, function () {
+        return __generator(this, function (_a) {
+            return [2 /*return*/, { code: 2 }];
+        });
+    }); });
     window.webContents.on("ipc-message", function () {
         console.log("ipc-message");
-        electron_1.shell.openExternal('http://www.google.com');
+        electron_1.shell.openExternal("http://www.google.com");
     });
-    console.log('end  ');
-    // window.loadURL('http://localhost:3000');
-    window.loadFile('index.html');
+    window.loadURL("http://localhost:3000");
 });
